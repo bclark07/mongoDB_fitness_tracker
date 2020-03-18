@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
 
-// const workoutdb = require("./models");
-
 const app = express();
 
 app.use(logger("dev")); //what does this do?
