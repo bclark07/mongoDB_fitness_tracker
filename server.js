@@ -13,8 +13,9 @@ app.use(express.json());
 
 app.use(express.static("public")); //tells the server to look in the public folder for static code
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", {
-  useNewUrlParser: true
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 //functions for routes imported here

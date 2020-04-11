@@ -1,12 +1,28 @@
 const router = require("express").Router();
-const workoutdb = require("../models");
+const workoutdb = require("../models/Workout.js");
 
 //get
 router.get("/api/workouts", (req, res) => {
+  // console.log(req.body);
   workoutdb
-    .find()
+    .find({})
     .then(function(data) {
       console.log(data);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+router.get("/api/workouts/range", (req, res) => {
+  //add a limit for workouts pulled
+  workoutdb
+    .find({})
+    // .limit(5) //put limit here
+    .then(function(data) {
+      //data is the result of the find()
+      console.log("second" + JSON.stringify(data));
+      res.json(data);
     })
     .catch(err => {
       res.json(err);
@@ -27,10 +43,10 @@ router.post("/api/workouts", function(req, res) {
 
 //put - update
 router.put("/api/workouts/:id", function(req, res) {
-  console.log(params.id);
+  console.log(req.params.id);
   workoutdb
     .findByIdAndUpdate(
-      params.id,
+      req.params.id,
       { $push: { exercises: req.body } },
       { new: true, runValidators: true }
     )
